@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phone 琳網 - 會員中心</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Phone 琳網 - 會員中心</h1>
+    </header>
+  
+    <nav>
+        <a href="index.html">首頁</a>
+        <a href="special.html">特色</a>
+        <a href="phone.html">手機</a>
+        <a href="tablet.html">平板</a>
+        <a href="membership.html">會員中心</a>
+    </nav>
+    
+    <div class="clearfix"></div>
+    
+    <main>
+        <section id="login-section">
+            <h2>會員登入</h2>
+            <form id="login-form">
+                <label for="login-username">用戶名：</label>
+                <input type="text" id="login-username" name="login-username" required><br>
+                <label for="login-password">密碼：</label>
+                <input type="password" id="login-password" name="login-password" required><br>
+                <button type="submit">登入</button>
+            </form>
+            <p><a href="#forgot-password-section">忘記密碼？</a></p>
+            <p>還沒有帳戶？ <a href="#register-section">註冊</a></p>
+        </section>
+
+        <section id="register-section">
+            <h2>註冊新帳戶</h2>
+            <form id="register-form">
+                <label for="register-username">用戶名：</label>
+                <input type="text" id="register-username" name="register-username" required><br>
+                <label for="register-email">電子郵件：</label>
+                <input type="email" id="register-email" name="register-email" required><br>
+                <label for="register-password">密碼：</label>
+                <input type="password" id="register-password" name="register-password" required><br>
+                <button type="submit">註冊</button>
+            </form>
+        </section>
+
+        <section id="forgot-password-section">
+            <h2>忘記密碼</h2>
+            <form id="forgot-password-form">
+                <label for="forgot-password-email">請輸入您的電子郵件：</label>
+                <input type="email" id="forgot-password-email" name="forgot-password-email" required><br>
+                <button type="submit">重設密碼</button>
+            </form>
+        </section>
+
+        <section id="user-info-section" style="display: none;">
+            <h2>會員資料</h2>
+            <p id="user-info">歡迎，<span id="user-name"></span>！</p>
+            <button id="logout-button">登出</button>
+        </section>
+    </main>
+    
+    <footer>
+        <h5>Copyright @ 2022 All rights reserved</h5>
+    </footer>
+    
+    <script>
+        document.getElementById('login-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            // 處理登入邏輯
+            document.getElementById('login-section').style.display = 'none';
+            document.getElementById('register-section').style.display = 'none';
+            document.getElementById('forgot-password-section').style.display = 'none';
+            document.getElementById('user-info-section').style.display = 'block';
+            document.getElementById('user-name').textContent = document.getElementById('login-username').value;
+        });
+
+        document.getElementById('logout-button').addEventListener('click', function() {
+            // 處理登出邏輯
+            document.getElementById('login-section').style.display = 'block';
+            document.getElementById('register-section').style.display = 'block';
+            document.getElementById('forgot-password-section').style.display = 'block';
+            document.getElementById('user-info-section').style.display = 'none';
+            document.getElementById('login-form').reset();
+        });
+
+        document.getElementById('register-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            // 處理註冊邏輯
+            alert('註冊成功！請登入。');
+            document.getElementById('login-section').style.display = 'block';
+            document.getElementById('register-section').style.display = 'none';
+            document.getElementById('forgot-password-section').style.display = 'none';
+        });
+
+        document.getElementById('forgot-password-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            // 處理忘記密碼邏輯
+            alert('密碼重設連結已發送到您的電子郵件。');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phone 琳網</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <script>
+      var pic = new Array(5);
+      var index = 0;
+      var mydiv = null;
+      var timer = null;
+
+      function init() {
+          for (var i=0; i<5; i++) {
+              pic[i] = "img\\phone" + (i+1) + ".jpg";
+          }
+          mydiv = document.getElementById("mydiv");
+          showPic(0);
+      }
+      
+      function showPic(num) {
+          index += num;
+          if (index < 0) {
+              index = pic.length - 1;
+          }
+          index = index % pic.length;
+          mydiv.innerHTML = "<img src='" + pic[index] + "' style='width:500px; height:350px;'>";
+          var file = document.getElementById("filename");
+          file.value = pic[index];
+      }
+
+      function autoShow() {
+          var btnPre = document.getElementById("btnPre");
+          var btnNext = document.getElementById("btnNext");
+          var btnAuto = document.getElementById("btnAuto");
+          var btnStop = document.getElementById("btnStop");
+
+          btnPre.disabled = true;
+          btnNext.disabled = true;
+          btnAuto.disabled = true;
+          btnStop.disabled = false;
+
+          showPic(1);
+          timer = setTimeout(autoShow, 3000);
+      }
+
+      function stop() {
+          var btnPre = document.getElementById("btnPre");
+          var btnNext = document.getElementById("btnNext");
+          var btnAuto = document.getElementById("btnAuto");
+          var btnStop = document.getElementById("btnStop");
+
+          btnPre.disabled = false;
+          btnNext.disabled = false;
+          btnAuto.disabled = false;
+          btnStop.disabled = true;
+
+          clearTimeout(timer);
+      }
+
+      function addToCart(product) {
+          alert(product + " 已新增至購物車！");
+      }
+  </script>
+  <style>
+      .divcenter {
+          text-align: center;
+      }
+      .card {
+          border: 1px solid #ddd;
+          padding: 16px;
+          text-align: center;
+      }
+      .card img {
+          width: 100%;
+          height: auto;
+      }
+      .cart-button {
+          margin-top: 8px;
+          padding: 8px 16px;
+          background-color: #4CAF50;
+          color: white;
+          border: none;
+          cursor: pointer;
+      }
+      .cart-button:hover {
+          background-color: #45a049;
+      }
+  </style>
+</head>
+
+<body onload="init();">
+    <header>
+        <h1>Phone 琳網</h1>
+    </header>
+  
+    <nav>
+        <a href="index.html">首頁</a>
+        <a href="special.html">特色</a>
+        <a href="phone.html">手機</a>
+        <a href="tablet.html">平板</a>
+        <a href="membership.html">會員中心</a>
+        <a href="cart.html">購物車</a>
+    </nav>
+
+    <main>
+        <h2>本期熱賣</h2>
+
+        <article>
+            <table>
+                <tr>
+                    <td>
+                        <section class="card">
+                            <h4>IPHONE 15 PRO</h4>
+                            <img class="img" src="img/phone.jpg" height="180px" width="200px" />
+                            <button class="cart-button" onclick="addToCart('IPHONE 15 PRO')">新增至購物車</button>
+                        </section>
+                    </td>
+                    <td>
+                        <section class="card">
+                            <h4>SAMSUNG Galaxy S24 Ultra</h4>
+                            <img class="img" src="img/phone1.jpg" height="180" width="200px" />
+                            <button class="cart-button" onclick="addToCart('SAMSUNG Galaxy S24 Ultra')">新增至購物車</button>
+                        </section>
+                    </td>
+                </tr>
+            </table>
+
+            <div class="divcenter">
+                <div id="mydiv"> 
+                    <img class="img" src="img/phone0.jpg" />
+                </div>
+
+                <input type="button" id="btnPre" value="Previous" onclick="showPic(-1)">
+                <input type="button" id="btnNext" value="Next" onclick="showPic(1)">
+                <input type="button" id="btnAuto" value="Auto" onclick="autoShow()">
+                <input type="button" id="btnStop" value="Stop" onclick="stop()"> <br/>
+
+                <input type="text" id="filename" value="">
+            </div>
+        </article>
+    </main>
+    <div class="clearfix"></div>
+    <footer>
+        <h5>Copyright @ 2022 All rights reserved</h5>
+    </footer>
+</body>
+</html>
